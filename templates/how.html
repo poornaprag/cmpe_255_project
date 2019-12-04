@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block content %}
+Test with various inputs here if it is bullying text or not
+        <div>
+          <form action="/result" method="POST">
+            <!-- <label for="age">Age</label> -->
+            <input type="text" id="text" name="text">
+            <input type="submit" value="Submit">
+          </form>
+        </div>
+{% endblock content %}
