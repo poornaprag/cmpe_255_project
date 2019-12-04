@@ -81,12 +81,12 @@ def result():
 def data():
     # if username == '':
     #     username = 'realDonaldTrump'
-    users_id = ['1425014252']
-    usernames = []
-    for id in users_id:
-        usernames.append(api.get_user(id).screen_name)
-    usernames.append('realDonaldTrump')
-    return render_template('data.html', title='Data We Use', users=usernames)
+    # users_id = ['1425014252']
+    # usernames = []
+    # for id in users_id:
+    #     usernames.append(api.get_user(id).screen_name)
+    # usernames.append('realDonaldTrump')
+    return render_template('data.html', title='Data We Use')
 
 
 @app.route('/data/<string:username>')
