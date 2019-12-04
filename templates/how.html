@@ -1,7 +1,27 @@
 {% extends "layout.html" %}
 {% block content %}
 Try it live.
+
 We have a trained model checking if the entered text here is productive/non productive in Reddit.
+
+<p>
+Some good examples are:
+Neg:
+<ul>
+  <li>you deserve to die<br>
+      you suck ahaha<br>
+      i don't like you<br>
+      i hate you and your whole self</li>
+</ul>
+<ul>
+    Pos:
+    I like morning and sunshine<br>
+    I prefer coffee to tea<br>
+    There are more than 1800 roads in Prussia<br>
+    They told me to go here but I didn't haha<br>
+</ul>
+
+</p>
         <div>
           <form action="/result" method="POST">
             <!-- <label for="age">Age</label> -->

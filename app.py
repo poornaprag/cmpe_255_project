@@ -71,9 +71,9 @@ def result():
         # to_predict_list = list(map(int, to_predict_list))
         result = ValuePredictor(sentence)
         if result == 1:
-            prediction = 'Bully'
+            prediction = 'Negative sentiment. Not very productive'
         else:
-            prediction = 'Non bully'
+            prediction = 'No problem. '
         return render_template("result.html", prediction=prediction)
 
 
