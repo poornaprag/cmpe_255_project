@@ -2,3 +2,4 @@ imblearn
 sklearn
 pandas
 flask
+nltk

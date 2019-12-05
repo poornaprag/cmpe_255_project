@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for, request
-import tweepy as tw
+# import tweepy as tw
 import json
 from sklearn.naive_bayes import BernoulliNB
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer, HashingVectorizer
