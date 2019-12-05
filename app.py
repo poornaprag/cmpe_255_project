@@ -54,6 +54,51 @@ def naive_bayes(sample_test):
 
     return result
 
+def get_sample_data():
+    d1 = pd.read_csv("comments_1.csv")
+    d2 = pd.read_csv("comments_2.csv")
+    d3 = d1.append(d2)
+    df=pd.DataFrame(d3)
+    
+    from sklearn.model_selection import train_test_split
+
+    X = df.headline
+    y = df.label
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+    from sklearn.feature_extraction.text import CountVectorizer
+
+    vect1 = CountVectorizer(ngram_range=(1,1))
+
+    vect2 = CountVectorizer(ngram_range=(2,2))
+
+    X_train_vect = vect1.fit_transform(X_train)
+
+    # making equal samples of -1 and +1 by oversampling with the help of SMOTE
+    # Handling class imbalance
+    from imblearn.over_sampling import SMOTE
+
+    sm = SMOTE()
+
+    X_train_res, y_train_res = sm.fit_sample(X_train_vect, y_train)
+    import numpy as np
+    unique, counts = np.unique(y_train_res, return_counts=True)
+    
+    result = list(zip(unique, counts))
+    negative = None
+    positive = None
+   
+    if result[0][0] == -1:
+        negative = result[0][1]
+        positive = result[1][1]
+    else:
+        negative = result[1][1]
+        positive = result[0][1]
+    final_res = [{"y":int(positive),"label":"Postive"},{"y":int(negative),"label":"Negative"}]
+
+    return final_res
+
 @app.route('/result', methods=['POST'])
 def result():
     if request.method == 'POST':
@@ -68,7 +113,7 @@ def result():
         prediction.append(knn_result)
         prediction.append(svm_result)
         
-        return render_template("result.html", prediction=prediction)
+        return render_template("result.html", prediction=prediction, sentence=sentence)
 
 
 @app.route("/data")
@@ -93,7 +138,11 @@ def vis():
     
     result = x.to_json(orient='records')
     # return result
-    return render_template('visual.html', title='Visualize',result=result)
+    import json 
+    sample_data = json.dumps(get_sample_data())
+    print (result)
+    print (sample_data)
+    return render_template('visual.html', title='Visualize',result=result, sample_data=sample_data)
 
 
 if __name__ == '__main__':

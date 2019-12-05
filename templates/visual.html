@@ -1,27 +1,43 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>Visualizations</h1>
+    <h1>Sampling</h1>
   <!DOCTYPE HTML>
 <html>
 <head>
 
 <script>
 window.onload = function () {
-var chart = new CanvasJS.Chart("chartContainer", {
-	animationEnabled: true,
-	exportEnabled: true,
-	theme: "light1", // "light1", "light2", "dark1", "dark2"
-	title:{
-		text: "Before Sampling"
-	},
-	
-	data: [{
-		type: "bar", 
-        
-		dataPoints: {{result|safe}}
-	}]
-});
-chart.render();
+	var chart1 = new CanvasJS.Chart("chartContainer", {
+		animationEnabled: true,
+		exportEnabled: true,
+		theme: "light1", // "light1", "light2", "dark1", "dark2"
+		title:{
+			text: "Before Sampling"
+		},
+		
+		data: [{
+			type: "bar", 
+			
+			dataPoints: {{result|safe}}
+		}]
+	});
+	chart1.render();
+
+	var chart2 = new CanvasJS.Chart("chartContainer2", {
+		animationEnabled: true,
+		exportEnabled: true,
+		theme: "light", // "light1", "light2", "dark1", "dark2"
+		title:{
+			text: "After Sampling"
+		},
+		
+		data: [{
+			type: "bar", 
+			
+			dataPoints: {{sample_data|safe}}
+		}]
+	});
+	chart2.render();
 
 }
 </script>
@@ -29,8 +45,17 @@ chart.render();
 </head>
 <body>
 <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+<br/>
+<br/>
+<div id="chartContainer2" style="height: 300px; width: 100%;"></div>
+<br/>
+<br/>
+<h1>Word Cloud</h1>
+<img src="/static/good_words.png" height="400px" width="600px">
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <!-- <script></script>{{result}} -->
+<br/>
+<br/>
 </body>
 </html>
 {% endblock content %}
