@@ -18,8 +18,8 @@ def how():
     return render_template('how.html', title='How It Works')
 
 
-def tokenize(tweet):
-    words = word_tokenize(tweet)
+def tokenize(sub):
+    words = word_tokenize(sub)
 
     stemmer = PorterStemmer()
     words = [stemmer.stem(word) for word in words]
@@ -46,6 +46,17 @@ def knn(sample_test):
 def naive_bayes(sample_test):
     vect = joblib.load('vect1.pkl')
     loaded_model = joblib.load('nb.pkl')
+
+    sample_test_dtm = vect.transform([sample_test])
+    result = loaded_model.predict(sample_test_dtm)
+    pdx = pd.DataFrame(result)
+    what = pdx[0].value_counts().to_json(orient='records')
+
+    return result
+
+def nb2(sample_test):
+    vect = joblib.load('vect2.pkl')
+    loaded_model = joblib.load('nb2.pkl')
 
     sample_test_dtm = vect.transform([sample_test])
     result = loaded_model.predict(sample_test_dtm)
@@ -104,14 +115,15 @@ def result():
     if request.method == 'POST':
         sentence = request.form['text']
         nb_result = naive_bayes(sentence)
-        # asdf()
         knn_result = knn(sentence)
         svm_result = svm(sentence)
+        nb2_result = nb2(sentence)
 
         prediction = []
         prediction.append(nb_result)
         prediction.append(knn_result)
         prediction.append(svm_result)
+        prediction.append(nb2_result)
         
         return render_template("result.html", prediction=prediction, sentence=sentence)
 
