@@ -16,6 +16,7 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer as SIA
 import nltk
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
+from sklearn.metrics import accuracy_score, f1_score, confusion_matrix
 
 # Reading in the data as data frame
 df = pd.read_csv("reddit_headlines_labels_2.csv")
