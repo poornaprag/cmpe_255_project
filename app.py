@@ -85,9 +85,9 @@ def vis():
     data = df['y'].value_counts()
 
     x=pd.DataFrame(data)
-    x['label']=['-1','0','1']
+    x['label']=['0','-1']
     
-    sent = {'1' : 'Postive', '0' : 'Neutral', '-1': 'Negative'} 
+    sent = {'0' : 'Postive', '-1': 'Negative'} 
         
     x.label = [sent[item] for item in x.label] 
     
