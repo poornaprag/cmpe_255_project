@@ -59,7 +59,7 @@ def result():
     if request.method == 'POST':
         sentence = request.form['text']
         nb_result = naive_bayes(sentence)
-        viz()
+        # asdf()
         knn_result = knn(sentence)
         svm_result = svm(sentence)
 
