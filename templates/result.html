@@ -1,15 +1,17 @@
+{% extends "layout.html" %}
+{% block content %}
 <!doctype html>
 <html>
 
 <body>
     <!-- <h1> {{ prediction }}</h1> -->
     
-    <h3>
-        NB predicted: {{prediction[0]}}<br>
-        KNN predicted: {{prediction[1]}}<br>
-        SVM predicted: {{prediction[2]}}<br>
-    </h3>
-    
+    <ul>
+        <li>NB predicted: {{prediction[0]}}</li>
+        <li>LR predicted: {{prediction[1]}}</li>
+        <li>SVM predicted: {{prediction[2]}}</li>
+    </ul>
 </body>
 
 </html>
+{% endblock content %}
