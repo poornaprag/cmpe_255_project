@@ -12,12 +12,12 @@ from nltk.stem import WordNetLemmatizer
 app = Flask(__name__)
 
 
+
+# @app.route("/about")
+# def about():
+#     return render_template('about.html')
+
 @app.route("/")
-@app.route("/about")
-def about():
-    return render_template('about.html')
-
-
 @app.route("/how")
 def how():
     return render_template('how.html', title='How It Works')
